@@ -121,10 +121,23 @@
                 "I am not being held hostage, i swear",
                 "the voices the voices the voices",
                 "Oh No!, the evil Pingas monster has taken over this splash text!",
-
             ];
-            document.getElementById('quote').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+        
+            function updateQuote() {
+                const quoteElement = document.getElementById('quote');
+                quoteElement.classList.remove('fade');
+                setTimeout(() => {
+                    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                    quoteElement.innerText = randomQuote;
+                    quoteElement.classList.add('fade');
+                }, 100); // Small delay to reset animation
+            }
+        
+            // Update the quote every 5 seconds
+            setInterval(updateQuote, 5000);
+            updateQuote(); // Initial call
         </script>
+        
         <style>
             #quote-container {
                 margin: 20px auto;
@@ -138,6 +151,11 @@
                 font-size: 18px;
                 color: white;
                 font-family: 'Comic Sans MS', cursive, sans-serif;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+            #quote.fade {
+                opacity: 1;
             }
         </style>
 
